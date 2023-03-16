@@ -57,7 +57,7 @@ class FlutterPayAndroid implements FlutterPayInterface {
 
   @override
   Future<void> init(
-      Future<bool> Function(String?, String, String) verifyReceipt) async {}
+      Future<bool> Function(String?, String, String) verifyReceipt, void Function() onError) async {}
 
   @override
   Future<void> restorePurchases() async {}
