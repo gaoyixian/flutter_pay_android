@@ -19,7 +19,7 @@ rootProject.allprojects {
         jcenter()
         mavenCentral()
         flatDir {
-            dirs "${project(':flutter_pay').projectDir}/libs" //this way we can find the .aar file in libs folder
+            dirs "${project(':flutter_pay_android').projectDir}/libs" //this way we can find the .aar file in libs folder
         }
     }
 }
