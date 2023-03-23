@@ -252,7 +252,7 @@ class _WithdrawaldetailsState extends State<Withdrawaldetails> {
   Widget initiate(IWithDrawDetail e) {
     return Column(
       children: [
-        icon('packages/flutter_pay_android/assets/images/mypage_new/dot_blue.png'),
+        icon('packages/flutter_pay_android/assets/images/dot_blue.png'),
         LDashedLine(
           axis: Axis.vertical,
           dashedWidth: 1,
@@ -261,8 +261,8 @@ class _WithdrawaldetailsState extends State<Withdrawaldetails> {
           dashedTotalLengthWith: 25.w,
         ),
         icon(e.transferTime == 0
-            ? 'packages/flutter_pay_android/assets/images/mypage_new/dot_prey.png'
-            : 'packages/flutter_pay_android/assets/images/mypage_new/dot_blue.png'),
+            ? 'packages/flutter_pay_android/assets/images/dot_prey.png'
+            : 'packages/flutter_pay_android/assets/images/dot_blue.png'),
         LDashedLine(
           axis: Axis.vertical,
           dashedWidth: 1,
@@ -271,10 +271,10 @@ class _WithdrawaldetailsState extends State<Withdrawaldetails> {
           dashedTotalLengthWith: 25.w,
         ),
         icon(e.status == 2
-            ? 'packages/flutter_pay_android/assets/images/mypage_new/fail_red.png'
+            ? 'packages/flutter_pay_android/assets/images/fail_red.png'
             : (e.transferTime == 0
-                ? 'packages/flutter_pay_android/assets/images/mypage_new/dot_prey.png'
-                : 'packages/flutter_pay_android/assets/images/mypage_new/success_blue.png'))
+                ? 'packages/flutter_pay_android/assets/images/dot_prey.png'
+                : 'packages/flutter_pay_android/assets/images/success_blue.png'))
       ],
     );
   }
@@ -307,15 +307,15 @@ class _WithdrawaldetailsState extends State<Withdrawaldetails> {
   String checkType(int type) {
     switch (type) {
       case DEFAULT:
-        return 'packages/flutter_pay_android/assets/images/mypage_new/zicon_circular.png';
+        return 'packages/flutter_pay_android/assets/images/zicon_circular.png';
       case ALIP:
-        return 'packages/flutter_pay_android/assets/images/mypage_new/zicon_circular.png';
+        return 'packages/flutter_pay_android/assets/images/zicon_circular.png';
       case WECHAT:
-        return 'packages/flutter_pay_android/assets/images/mypage_new/wechat.png';
+        return 'packages/flutter_pay_android/assets/images/wechat.png';
       case BANDCARD:
-        return 'packages/flutter_pay_android/assets/images/mypage_new/zicon_circular.png';
+        return 'packages/flutter_pay_android/assets/images/zicon_circular.png';
       default:
-        return 'packages/flutter_pay_android/assets/images/mypage_new/zicon_circular.png';
+        return 'packages/flutter_pay_android/assets/images/zicon_circular.png';
     }
   }
 

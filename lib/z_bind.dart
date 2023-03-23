@@ -128,7 +128,7 @@ class _ZBindState extends State<ZBind> {
             prefixIcon: Padding(
               padding: EdgeInsets.only(right: 8.w),
               child: Image.asset(
-                'packages/flutter_pay_android/assets/images/mypage_new/zicon_square.png',
+                'packages/flutter_pay_android/assets/images/zicon_square.png',
                 width: 26.w,
               ),
             ),

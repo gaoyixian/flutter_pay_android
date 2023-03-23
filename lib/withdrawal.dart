@@ -204,7 +204,7 @@ class _WithdrawalState extends State<Withdrawal> {
                 width: 20.w,
                 height: 20.w,
                 child:
-                    Image.asset('packages/flutter_pay_android/assets/images/mypage_new/zicon_circular.png')),
+                    Image.asset('packages/flutter_pay_android/assets/images/zicon_circular.png')),
             SizedBox(
               width: 8.w,
             ),
@@ -270,8 +270,8 @@ class _WithdrawalState extends State<Withdrawal> {
               child: SizedBox(
                 width: 35.w,
                 child: Image.asset(e.activeType == 1
-                    ? 'packages/flutter_pay_android/assets/images/mypage_new/xinyonghu.png'
-                    : 'packages/flutter_pay_android/assets/images/mypage_new/miaodaozhang.png'),
+                    ? 'packages/flutter_pay_android/assets/images/xinyonghu.png'
+                    : 'packages/flutter_pay_android/assets/images/miaodaozhang.png'),
               ),
             ),
           ],

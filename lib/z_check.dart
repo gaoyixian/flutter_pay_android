@@ -113,7 +113,7 @@ class _ZCheckState extends State<ZCheck> {
         SizedBox(
           width: 52.w,
           height: 52.w,
-          child: Image.asset('packages/flutter_pay_android/assets/images/mypage_new/zicon_square.png'),
+          child: Image.asset('packages/flutter_pay_android/assets/images/zicon_square.png'),
         ),
         SizedBox(
           width: 12.w,

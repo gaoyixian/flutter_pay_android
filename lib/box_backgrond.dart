@@ -23,7 +23,7 @@ class BoxBackground extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomRight,
         children: [
-          Image.asset('packages/flutter_pay_android/assets/images/mypage_new/background_element.png'),
+          Image.asset('packages/flutter_pay_android/assets/images/background_element.png'),
           box
         ],
       ),
