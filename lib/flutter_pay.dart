@@ -1,6 +1,9 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_pay_android/withdrawal_interface.dart';
 import 'package:flutter_pay_interface/flutter_pay_interface.dart';
 
 /// 支付类型
@@ -9,13 +12,22 @@ const payTypeWechat = 2;
 const payTypeIos = 3;
 const payTypeBankcard = 4;
 
+//提现账户类型
+const int DEFAULT = 0;
+const int ALIP = 1;
+const int WECHAT = 2;
+const int BANDCARD = 3;
+
 class FlutterPayAndroid implements FlutterPayInterface {
+  
   static const MethodChannel _channel = MethodChannel('flutter_pay');
 
   static Future<String?> get platformVersion async {
     final String? version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
+
+  static late IWithDrawalMgr withDrawalMgr;
 
   /// 微信
   static Future<bool> wechatPay(String appId, String partnerId, String prepayId,
@@ -55,9 +67,15 @@ class FlutterPayAndroid implements FlutterPayInterface {
     }
   }
 
+  static late LocalizationText localizationText;
+
   @override
   Future<void> init(
-      Future<bool> Function(String?, String, String) verifyReceipt, void Function() onError) async {}
+      {required VerifyReceipt verifyReceipt,
+      required LocalizationText localizationText,
+      required void Function() onError}) async {
+    FlutterPayAndroid.localizationText = localizationText;
+  }
 
   @override
   Future<void> restorePurchases() async {}
@@ -65,3 +83,26 @@ class FlutterPayAndroid implements FlutterPayInterface {
   @override
   Future<void> logout() async {}
 }
+
+// /*底部弹出框*/
+// Future<T?> showBottomSheet<T>({
+//   required BuildContext context,
+//   required Widget container,
+//   bool? isDismissible,
+//   enableDrag = true,
+//   Color? colors,
+//   RouteSettings? setting,
+// }) {
+//   return showModalBottomSheet<T>(
+//     context: context,
+//     backgroundColor: Colors.transparent,
+//     barrierColor: colors ?? Colors.black.withAlpha(80),
+//     isScrollControlled: true,
+//     isDismissible: isDismissible ?? true,
+//     enableDrag: enableDrag,
+//     routeSettings: setting,
+//     builder: (context) {
+//       return container;
+//     },
+//   );
+// }

@@ -32,6 +32,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "events_widget",
+      "rootUri": "file:///Users/fang/.pub-cache/git/events_widget-ef7c3b91ad6e1527b7eb95004884b919d4991b89/",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///Users/fang/.pub-cache/hosted/pub.flutter-io.cn/fake_async-1.3.1",
       "packageUri": "lib/",
@@ -51,7 +57,13 @@
     },
     {
       "name": "flutter_pay_interface",
-      "rootUri": "file:///Users/fang/.pub-cache/git/flutter_pay_interface-4f1b07ab2c1cafbe4a9d6087cba0a560873644f7/",
+      "rootUri": "file:///Users/fang/.pub-cache/git/flutter_pay_interface-9a211073aa40be20ebd15c8507186df07691ed9c/",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_screenutil",
+      "rootUri": "file:///Users/fang/.pub-cache/hosted/pub.flutter-io.cn/flutter_screenutil-5.7.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -98,6 +110,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "pull_to_refresh",
+      "rootUri": "file:///Users/fang/.pub-cache/git/flutter_pulltorefresh-dbef66cc57ba6be68653c20a7a38ac9178646075/",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/fang/development/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -140,6 +158,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "universal_platform",
+      "rootUri": "file:///Users/fang/.pub-cache/hosted/pub.flutter-io.cn/universal_platform-1.0.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///Users/fang/.pub-cache/hosted/pub.flutter-io.cn/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -152,7 +176,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-03-16T09:56:21.816465Z",
+  "generated": "2023-03-23T10:21:55.647806Z",
   "generator": "pub",
   "generatorVersion": "2.19.4"
 }

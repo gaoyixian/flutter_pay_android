@@ -41,6 +41,15 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.17.0"
+  events_widget:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: ef7c3b91ad6e1527b7eb95004884b919d4991b89
+      resolved-ref: ef7c3b91ad6e1527b7eb95004884b919d4991b89
+      url: "http://git.eatdesk.net/flutter_plugin/events_widget.git"
+    source: git
+    version: "0.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -66,11 +75,19 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "4f1b07ab2c1cafbe4a9d6087cba0a560873644f7"
-      resolved-ref: "4f1b07ab2c1cafbe4a9d6087cba0a560873644f7"
+      ref: "9a211073aa40be20ebd15c8507186df07691ed9c"
+      resolved-ref: "9a211073aa40be20ebd15c8507186df07691ed9c"
       url: "http://git.eatdesk.net/flutter_plugin/flutter_pay_interface.git"
     source: git
     version: "0.0.1"
+  flutter_screenutil:
+    dependency: "direct main"
+    description:
+      name: flutter_screenutil
+      sha256: "0a122936b450324cbdfd51be0819cc6fcebb093eb65585e9cd92263f7a1a8a39"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.7.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -124,6 +141,15 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.2"
+  pull_to_refresh:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: dbef66cc57ba6be68653c20a7a38ac9178646075
+      resolved-ref: dbef66cc57ba6be68653c20a7a38ac9178646075
+      url: "http://git.eatdesk.net/flutter_plugin/flutter_pulltorefresh.git"
+    source: git
+    version: "2.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -177,6 +203,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.4.16"
+  universal_platform:
+    dependency: "direct main"
+    description:
+      name: universal_platform
+      sha256: d315be0f6641898b280ffa34e2ddb14f3d12b1a37882557869646e0cc363d0cc
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0+1"
   vector_math:
     dependency: transitive
     description:
@@ -187,4 +221,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=2.18.0 <3.0.0"
-  flutter: ">=1.20.0"
+  flutter: ">=2.0.0"
