@@ -2,10 +2,6 @@ events_widget
 2.12
 file:///Users/fang/.pub-cache/git/events_widget-ef7c3b91ad6e1527b7eb95004884b919d4991b89/
 file:///Users/fang/.pub-cache/git/events_widget-ef7c3b91ad6e1527b7eb95004884b919d4991b89/lib/
-flutter_pay_interface
-2.12
-file:///Users/fang/.pub-cache/git/flutter_pay_interface-7d3ceda4207275b9e8040d1485b46888f7aec72c/
-file:///Users/fang/.pub-cache/git/flutter_pay_interface-7d3ceda4207275b9e8040d1485b46888f7aec72c/lib/
 pull_to_refresh
 2.12
 file:///Users/fang/.pub-cache/git/flutter_pulltorefresh-dbef66cc57ba6be68653c20a7a38ac9178646075/
@@ -102,6 +98,10 @@ flutter_pay_android
 2.12
 file:///Users/fang/Documents/work/cheban/flutter_plugin/flutter_pay/flutter_pay_android/
 file:///Users/fang/Documents/work/cheban/flutter_plugin/flutter_pay/flutter_pay_android/lib/
+flutter_pay_interface
+2.12
+file:///Users/fang/Documents/work/cheban/flutter_plugin/flutter_pay/flutter_pay_interface/
+file:///Users/fang/Documents/work/cheban/flutter_plugin/flutter_pay/flutter_pay_interface/lib/
 sky_engine
 2.12
 file:///Users/fang/development/flutter/bin/cache/pkg/sky_engine/

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_pay_interface/flutter_pay_interface.dart';
 
 import 'android_widgets.dart';
+import 'vip_pay_bottom.dart';
 import 'withdrawal.dart';
 import 'withdrawal_details.dart';
 
@@ -122,5 +123,20 @@ class FlutterPayAndroid implements FlutterPayInterface {
     FlutterPayAndroid.showBottomSheet(
         context: context,
         container: RechargePopup(id: id, gold: gold, rmb: rmb, toPay: toPay));
+  }
+  
+  @override
+  void vipPayBottom(BuildContext context, {required int index, required void Function(bool isShow) onchange}) {
+    FlutterPayAndroid.showBottomSheet(
+        context: context,
+        container: VipPayBottom(
+          index: index,
+          onchange: onchange,
+        ));
+  }
+  
+  @override
+  int getTyp(bool isAli) {
+    return isAli ? payTypeAlipay: payTypeWechat;
   }
 }
