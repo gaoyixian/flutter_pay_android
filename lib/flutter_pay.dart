@@ -139,4 +139,9 @@ class FlutterPayAndroid implements FlutterPayInterface {
   int getTyp(bool isAli) {
     return isAli ? payTypeAlipay: payTypeWechat;
   }
+  
+  @override
+  String getPname(bool isAli) {
+    return isAli ? '支付宝支付' : '微信支付';
+  }
 }
