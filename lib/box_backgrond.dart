@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pay_interface/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'color.dart';
 
 class BoxBackground extends StatelessWidget {
   final Widget box;

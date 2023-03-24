@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pay_android/flutter_pay.dart';
+import 'package:flutter_pay_interface/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'choose_pay.dart';
-import 'color.dart';
 
 Widget returnBackBlackBtn({double? left}) {
   return Container(
@@ -54,7 +54,7 @@ Widget _content(String text) {
   );
 }
 
-Widget getAndroidlxbysm() {
+Widget getLxbysm() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [

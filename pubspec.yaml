@@ -17,17 +17,18 @@ dependencies:
   flutter_pay_interface:
    git:
     url: http://git.eatdesk.net/flutter_plugin/flutter_pay_interface.git
-    ref: 9a211073aa40be20ebd15c8507186df07691ed9c
-   # 状态管理
-  events_widget:
-   git:
-    url: http://git.eatdesk.net/flutter_plugin/events_widget.git
-    ref: ef7c3b91ad6e1527b7eb95004884b919d4991b89
+    ref: 7d3ceda4207275b9e8040d1485b46888f7aec72c
+  #  path: ../flutter_pay_interface
   #刷新和加载更多
   pull_to_refresh:
     git:
       url: http://git.eatdesk.net/flutter_plugin/flutter_pulltorefresh.git
       ref: dbef66cc57ba6be68653c20a7a38ac9178646075
+  # 状态管理
+  events_widget:
+   git:
+    url: http://git.eatdesk.net/flutter_plugin/events_widget.git
+    ref: ef7c3b91ad6e1527b7eb95004884b919d4991b89
 
 dev_dependencies:
   flutter_test:

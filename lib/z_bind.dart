@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pay_interface/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'color.dart';
 import 'common_button.dart';
 import 'custom_text_field.dart';
 import 'flutter_pay.dart';
@@ -22,11 +22,9 @@ class _ZBindState extends State<ZBind> {
     if (res) {
       if (mounted) {
         Navigator.pop(context);
-        showBottomSheet(
+        FlutterPayAndroid.showBottomSheet(
             context: context,
-            builder: (BuildContext context) {
-              return const ZCheck();
-            });
+            container: const ZCheck(),);
       }
     }
   }

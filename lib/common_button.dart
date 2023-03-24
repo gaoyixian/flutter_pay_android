@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pay_android/flutter_pay.dart';
+import 'package:flutter_pay_interface/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-import 'color.dart';
 
 class CommonButton {
   //渐变按钮

@@ -1,14 +1,14 @@
 import 'package:events_widget/events_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pay_android/flutter_pay.dart';
-import 'package:flutter_pay_android/withdrawal_details.dart';
+import 'package:flutter_pay_interface/color.dart';
+import 'package:flutter_pay_interface/flutter_pay_interface.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'android_widgets.dart';
 import 'box_backgrond.dart';
-import 'color.dart';
 import 'common_button.dart';
-import 'withdrawal_interface.dart';
+import 'withdrawal_details.dart';
 import 'z_bind.dart';
 import 'z_check.dart';
 
@@ -47,20 +47,18 @@ class _WithdrawalState extends State<Withdrawal> {
 
   //绑定支付宝
   _toBind() {
-    showBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return const ZBind();
-        });
+    FlutterPayAndroid.showBottomSheet(
+      context: context,
+      container: const ZBind(),
+    );
   }
 
   //确认提现
   _toSumbit() {
-    showBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return const ZCheck();
-        });
+    FlutterPayAndroid.showBottomSheet(
+      context: context,
+      container: const ZCheck(),
+    );
   }
 
   @override
@@ -203,8 +201,8 @@ class _WithdrawalState extends State<Withdrawal> {
             SizedBox(
                 width: 20.w,
                 height: 20.w,
-                child:
-                    Image.asset('packages/flutter_pay_android/assets/images/zicon_circular.png')),
+                child: Image.asset(
+                    'packages/flutter_pay_android/assets/images/zicon_circular.png')),
             SizedBox(
               width: 8.w,
             ),

@@ -2,13 +2,13 @@
 import 'package:events_widget/events_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pay_android/flutter_pay.dart';
+import 'package:flutter_pay_interface/color.dart';
+import 'package:flutter_pay_interface/flutter_pay_interface.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'android_widgets.dart';
-import 'color.dart';
 import 'my_separatoe.dart';
-import 'withdrawal_interface.dart';
 
 //01-01 23:00
 String getCashTime(int startime) {

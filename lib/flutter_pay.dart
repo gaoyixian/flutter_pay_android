@@ -2,9 +2,13 @@
 
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_pay_android/withdrawal_interface.dart';
 import 'package:flutter_pay_interface/flutter_pay_interface.dart';
+
+import 'android_widgets.dart';
+import 'withdrawal.dart';
+import 'withdrawal_details.dart';
 
 /// 支付类型
 const payTypeAlipay = 1;
@@ -19,7 +23,6 @@ const int WECHAT = 2;
 const int BANDCARD = 3;
 
 class FlutterPayAndroid implements FlutterPayInterface {
-  
   static const MethodChannel _channel = MethodChannel('flutter_pay');
 
   static Future<String?> get platformVersion async {
@@ -28,6 +31,7 @@ class FlutterPayAndroid implements FlutterPayInterface {
   }
 
   static late IWithDrawalMgr withDrawalMgr;
+  static late ShowBottomSheet showBottomSheet;
 
   /// 微信
   static Future<bool> wechatPay(String appId, String partnerId, String prepayId,
@@ -49,6 +53,14 @@ class FlutterPayAndroid implements FlutterPayInterface {
       'orderInfo': orderInfo,
     });
     return result == 'true';
+  }
+
+  FlutterPayAndroid(IWithDrawalMgr mgr) {
+    FlutterPayAndroid.withDrawalMgr = mgr;
+    mgr.setMakeEarningsFunc(() => const Earnings());
+    mgr.setMakeCashFunc(() => const Withdrawal());
+    mgr.setMakeCashDetailsFunc(() => const Withdrawaldetails());
+    mgr.setPageDef(Withdrawal, Withdrawaldetails, Earnings);
   }
 
   @override
@@ -73,8 +85,10 @@ class FlutterPayAndroid implements FlutterPayInterface {
   Future<void> init(
       {required VerifyReceipt verifyReceipt,
       required LocalizationText localizationText,
+      required ShowBottomSheet showBottomSheet,
       required void Function() onError}) async {
     FlutterPayAndroid.localizationText = localizationText;
+    FlutterPayAndroid.showBottomSheet = showBottomSheet;
   }
 
   @override
@@ -82,27 +96,31 @@ class FlutterPayAndroid implements FlutterPayInterface {
 
   @override
   Future<void> logout() async {}
-}
 
-// /*底部弹出框*/
-// Future<T?> showBottomSheet<T>({
-//   required BuildContext context,
-//   required Widget container,
-//   bool? isDismissible,
-//   enableDrag = true,
-//   Color? colors,
-//   RouteSettings? setting,
-// }) {
-//   return showModalBottomSheet<T>(
-//     context: context,
-//     backgroundColor: Colors.transparent,
-//     barrierColor: colors ?? Colors.black.withAlpha(80),
-//     isScrollControlled: true,
-//     isDismissible: isDismissible ?? true,
-//     enableDrag: enableDrag,
-//     routeSettings: setting,
-//     builder: (context) {
-//       return container;
-//     },
-//   );
-// }
+  @override
+  getAndroidlxbysm() {
+    return getLxbysm();
+  }
+
+  @override
+  Widget getPlayButton(BuildContext context, double rate, int chooseIndex,
+      void Function(int index, int typ) toPay) {
+    return AndroidPlayButton(
+        rate: rate,
+        toPayFunc: (typ) {
+          toPay(chooseIndex + 3, typ);
+        });
+  }
+
+  @override
+  void paymethodBottom(BuildContext context,
+      {required int id,
+      required int gold,
+      required int rmb,
+      required void Function(int p1, int p2) toPay}) {
+    Navigator.of(context).pop();
+    FlutterPayAndroid.showBottomSheet(
+        context: context,
+        container: RechargePopup(id: id, gold: gold, rmb: rmb, toPay: toPay));
+  }
+}

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pay_android/flutter_pay.dart';
+import 'package:flutter_pay_interface/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'color.dart';
 import 'common_button.dart';
 import 'z_bind.dart';
 
@@ -16,17 +16,16 @@ class ZCheck extends StatefulWidget {
 class _ZCheckState extends State<ZCheck> {
   _tomodify() {
     Navigator.pop(context);
-    showBottomSheet(
-            context: context,
-            builder: (BuildContext context) {
-              return const ZBind();
-            });
+    FlutterPayAndroid.showBottomSheet(
+      context: context,
+      container: const ZBind(),
+    );
   }
 
   String aliName = FlutterPayAndroid.withDrawalMgr.aliName == ''
       ? ''
-      : FlutterPayAndroid.withDrawalMgr.aliName
-          .replaceRange(1, FlutterPayAndroid.withDrawalMgr.aliName.length - 1, '*');
+      : FlutterPayAndroid.withDrawalMgr.aliName.replaceRange(
+          1, FlutterPayAndroid.withDrawalMgr.aliName.length - 1, '*');
 
   //提现
   _tofinish() async {
@@ -113,7 +112,8 @@ class _ZCheckState extends State<ZCheck> {
         SizedBox(
           width: 52.w,
           height: 52.w,
-          child: Image.asset('packages/flutter_pay_android/assets/images/zicon_square.png'),
+          child: Image.asset(
+              'packages/flutter_pay_android/assets/images/zicon_square.png'),
         ),
         SizedBox(
           width: 12.w,

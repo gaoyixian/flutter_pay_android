@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pay_android/flutter_pay.dart';
+import 'package:flutter_pay_interface/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'color.dart';
 class ChoosePay extends StatefulWidget {
   final Function(bool isShow)? onchange;
   const ChoosePay({Key? key, this.onchange}) : super(key: key);
