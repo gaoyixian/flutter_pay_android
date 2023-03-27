@@ -47,7 +47,7 @@ class _ChoosePayState extends State<ChoosePay> {
                       SizedBox(height: 21.w),
                       _item('packages/flutter_pay_android/assets/images/zicon.png',
                           '支付宝支付', true),
-                      _item('packages/flutter_pay_android/assets/images/wicon.png',
+                      _item('packages/flutter_pay_android/assets/images/wcicon.png',
                           '微信支付', false),
                     ],
                   ),

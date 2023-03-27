@@ -46,7 +46,7 @@ class _VipPayBottomState extends State<VipPayBottom> {
           ),
           _item('packages/flutter_pay_android/assets/images/zicon.png', '支付宝支付',
               true, payTypeAlipay),
-          _item('packages/flutter_pay_android/assets/images/wicon.png', '微信支付',
+          _item('packages/flutter_pay_android/assets/images/wcicon.png', '微信支付',
               false, payTypeWechat),
         ],
       ),
