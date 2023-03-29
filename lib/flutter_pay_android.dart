@@ -107,7 +107,7 @@ class FlutterPayAndroid extends FlutterPayPlatform {
       required int gold,
       required int rmb,
       required void Function(int p1, int p2) toPay}) {
-    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
     FlutterPayAndroid.showBottomSheet(
         context: context,
         container: RechargePopup(id: id, gold: gold, rmb: rmb, toPay: toPay));
