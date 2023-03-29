@@ -74,11 +74,9 @@ packages:
   flutter_pay_interface:
     dependency: "direct main"
     description:
-      path: "."
-      ref: de90cdce50e90fefb95ba4778e690de5b48004ca
-      resolved-ref: de90cdce50e90fefb95ba4778e690de5b48004ca
-      url: "http://git.eatdesk.net/flutter_plugin/flutter_pay_interface.git"
-    source: git
+      path: "../flutter_pay_interface"
+      relative: true
+    source: path
     version: "0.0.1"
   flutter_screenutil:
     dependency: "direct main"
@@ -141,6 +139,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.2"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      sha256: "6a2128648c854906c53fa8e33986fc0247a1116122f9534dd20e3ab9e16a32bc"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.4"
   pull_to_refresh:
     dependency: "direct main"
     description:

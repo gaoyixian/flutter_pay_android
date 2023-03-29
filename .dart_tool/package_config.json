@@ -57,7 +57,7 @@
     },
     {
       "name": "flutter_pay_interface",
-      "rootUri": "file:///Users/fang/.pub-cache/git/flutter_pay_interface-de90cdce50e90fefb95ba4778e690de5b48004ca/",
+      "rootUri": "../../flutter_pay_interface",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -108,6 +108,12 @@
       "rootUri": "file:///Users/fang/.pub-cache/hosted/pub.flutter-io.cn/path-1.8.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "plugin_platform_interface",
+      "rootUri": "file:///Users/fang/.pub-cache/hosted/pub.flutter-io.cn/plugin_platform_interface-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "pull_to_refresh",
@@ -176,7 +182,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-03-24T13:46:11.077499Z",
+  "generated": "2023-03-29T05:52:14.430063Z",
   "generator": "pub",
   "generatorVersion": "2.19.4"
 }

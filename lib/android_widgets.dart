@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pay_android/flutter_pay.dart';
+import 'package:flutter_pay_android/flutter_pay_android.dart';
 import 'package:flutter_pay_interface/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

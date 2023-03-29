@@ -3,7 +3,7 @@ import 'package:flutter_pay_interface/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'common_button.dart';
 import 'custom_text_field.dart';
-import 'flutter_pay.dart';
+import 'flutter_pay_android.dart';
 import 'z_check.dart';
 
 class ZBind extends StatefulWidget {

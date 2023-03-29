@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pay_interface/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'flutter_pay.dart';
+import 'flutter_pay_android.dart';
 
 class VipPayBottom extends StatefulWidget {
   const VipPayBottom({Key? key, this.onchange, required this.index})

@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 import 'package:events_widget/events_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pay_android/flutter_pay.dart';
+import 'package:flutter_pay_android/flutter_pay_android.dart';
 import 'package:flutter_pay_interface/color.dart';
 import 'package:flutter_pay_interface/flutter_pay_interface.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

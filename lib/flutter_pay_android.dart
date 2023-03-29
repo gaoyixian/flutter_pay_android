@@ -23,8 +23,14 @@ const int ALIP = 1;
 const int WECHAT = 2;
 const int BANDCARD = 3;
 
-class FlutterPayAndroid implements FlutterPayInterface {
+class FlutterPayAndroid extends FlutterPayPlatform {
   static const MethodChannel _channel = MethodChannel('flutter_pay');
+
+  /// Registers this class as the default instance of [PathProviderPlatform].
+  static void registerWith() {
+    print("@@@@@@@@@@@@@@@ FlutterPayPlatform.instance = FlutterPayAndroid()");
+    FlutterPayPlatform.instance = FlutterPayAndroid();
+  }
 
   static Future<String?> get platformVersion async {
     final String? version = await _channel.invokeMethod('getPlatformVersion');
@@ -56,14 +62,6 @@ class FlutterPayAndroid implements FlutterPayInterface {
     return result == 'true';
   }
 
-  FlutterPayAndroid(IWithDrawalMgr mgr) {
-    FlutterPayAndroid.withDrawalMgr = mgr;
-    mgr.setMakeEarningsFunc(() => const Earnings());
-    mgr.setMakeCashFunc(() => const Withdrawal());
-    mgr.setMakeCashDetailsFunc(() => const Withdrawaldetails());
-    mgr.setPageDef(Withdrawal, Withdrawaldetails, Earnings);
-  }
-
   @override
   Future<void> pay(dynamic rsp, int time) async {
     if (getObjectKeyValueByPath(rsp, 'data.pay_type') == payTypeWechat) {
@@ -83,23 +81,13 @@ class FlutterPayAndroid implements FlutterPayInterface {
   static late LocalizationText localizationText;
 
   @override
-  Future<void> init(
-      {required VerifyReceipt verifyReceipt,
-      required LocalizationText localizationText,
-      required ShowBottomSheet showBottomSheet,
-      required void Function() onError}) async {
-    FlutterPayAndroid.localizationText = localizationText;
-    FlutterPayAndroid.showBottomSheet = showBottomSheet;
-  }
-
-  @override
   Future<void> restorePurchases() async {}
 
   @override
   Future<void> logout() async {}
 
   @override
-  getAndroidlxbysm() {
+  getLxbysm() {
     return getLxbysm();
   }
 
@@ -124,9 +112,10 @@ class FlutterPayAndroid implements FlutterPayInterface {
         context: context,
         container: RechargePopup(id: id, gold: gold, rmb: rmb, toPay: toPay));
   }
-  
+
   @override
-  void vipPayBottom(BuildContext context, {required int index, required void Function(bool isShow) onchange}) {
+  void vipPayBottom(BuildContext context,
+      {required int index, required void Function(bool isShow) onchange}) {
     FlutterPayAndroid.showBottomSheet(
         context: context,
         container: VipPayBottom(
@@ -134,14 +123,30 @@ class FlutterPayAndroid implements FlutterPayInterface {
           onchange: onchange,
         ));
   }
-  
+
   @override
   int getTyp(bool isAli) {
-    return isAli ? payTypeAlipay: payTypeWechat;
+    return isAli ? payTypeAlipay : payTypeWechat;
   }
-  
+
   @override
   String getPname(bool isAli) {
     return isAli ? '支付宝支付' : '微信支付';
+  }
+
+  @override
+  Future<void> init(
+      {required VerifyReceipt verifyReceipt,
+      required LocalizationText localizationText,
+      required void Function() onError,
+      required ShowBottomSheet showBottomSheet,
+      required IWithDrawalMgr withDrawalMgr}) async {
+    FlutterPayAndroid.localizationText = localizationText;
+    FlutterPayAndroid.showBottomSheet = showBottomSheet;
+    FlutterPayAndroid.withDrawalMgr = withDrawalMgr;
+    withDrawalMgr.setMakeEarningsFunc(() => const Earnings());
+    withDrawalMgr.setMakeCashFunc(() => const Withdrawal());
+    withDrawalMgr.setMakeCashDetailsFunc(() => const Withdrawaldetails());
+    withDrawalMgr.setPageDef(Withdrawal, Withdrawaldetails, Earnings);
   }
 }
