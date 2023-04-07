@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_pay_interface/flutter_pay_interface.dart';
 
-import 'android_widgets.dart';
+import 'android_widgets.dart' as android;
 import 'vip_pay_bottom.dart';
 import 'withdrawal.dart';
 import 'withdrawal_details.dart';
@@ -88,13 +88,13 @@ class FlutterPayAndroid extends FlutterPayPlatform {
 
   @override
   getLxbysm() {
-    return getLxbysm();
+    return android.getLxbysm();
   }
 
   @override
   Widget getPlayButton(BuildContext context, double rate, int chooseIndex,
       void Function(int index, int typ) toPay) {
-    return AndroidPlayButton(
+    return android.AndroidPlayButton(
         rate: rate,
         toPayFunc: (typ) {
           toPay(chooseIndex + 3, typ);
@@ -110,7 +110,7 @@ class FlutterPayAndroid extends FlutterPayPlatform {
     // Navigator.of(context).pop();
     FlutterPayAndroid.showBottomSheet(
         context: context,
-        container: RechargePopup(id: id, gold: gold, rmb: rmb, toPay: toPay));
+        container: android.RechargePopup(id: id, gold: gold, rmb: rmb, toPay: toPay));
   }
 
   @override
@@ -144,9 +144,9 @@ class FlutterPayAndroid extends FlutterPayPlatform {
     FlutterPayAndroid.localizationText = localizationText;
     FlutterPayAndroid.showBottomSheet = showBottomSheet;
     FlutterPayAndroid.withDrawalMgr = withDrawalMgr;
-    withDrawalMgr.setMakeEarningsFunc(() => const Earnings());
+    withDrawalMgr.setMakeEarningsFunc(() => const android.Earnings());
     withDrawalMgr.setMakeCashFunc(() => const Withdrawal());
     withDrawalMgr.setMakeCashDetailsFunc(() => const Withdrawaldetails());
-    withDrawalMgr.setPageDef(Withdrawal, Withdrawaldetails, Earnings);
+    withDrawalMgr.setPageDef(Withdrawal, Withdrawaldetails, android.Earnings);
   }
 }
