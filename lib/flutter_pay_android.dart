@@ -140,12 +140,25 @@ class FlutterPayAndroid extends FlutterPayPlatform {
   }
 
   @override
+  String getPnameByType(int type) {
+    switch(type){
+      case payTypeAlipay:
+        return '支付宝支付';
+      case payTypeWechat:
+        return '微信支付';
+    }
+    return '';
+  }
+
+  @override
   Future<void> init(
       {required VerifyReceipt verifyReceipt,
       required LocalizationText localizationText,
       required void Function() onError,
       required ShowBottomSheet showBottomSheet,
-      required IWithDrawalMgr withDrawalMgr}) async {
+      required IWithDrawalMgr withDrawalMgr,
+      String? payConfig, //pay插件配置
+  }) async {
     FlutterPayAndroid.localizationText = localizationText;
     FlutterPayAndroid.showBottomSheet = showBottomSheet;
     FlutterPayAndroid.withDrawalMgr = withDrawalMgr;
