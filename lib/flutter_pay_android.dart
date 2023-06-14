@@ -102,15 +102,20 @@ class FlutterPayAndroid extends FlutterPayPlatform {
   }
 
   @override
-  void paymethodBottom(BuildContext context,
-      {required int id,
-      required int gold,
-      required int rmb,
-      required void Function(int p1, int p2) toPay}) {
+  void paymethodBottom(
+    BuildContext context, {
+    required int id,
+    required int gold,
+    required double price,
+    String? currencyCode,
+    required void Function(int p1, int p2) toPay,
+  }) {
+    currencyCode ??= CurrencyCode.CNY;
     // Navigator.of(context).pop();
     FlutterPayAndroid.showBottomSheet(
         context: context,
-        container: android.RechargePopup(id: id, gold: gold, rmb: rmb, toPay: toPay));
+        container:
+            android.RechargePopup(id: id, gold: gold, price: price, currencyCode: currencyCode, toPay: toPay));
   }
 
   @override

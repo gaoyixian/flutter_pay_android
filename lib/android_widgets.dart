@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pay_android/flutter_pay_android.dart';
 import 'package:flutter_pay_interface/color.dart';
+import 'package:flutter_pay_interface/flutter_pay_interface.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'choose_pay.dart';
@@ -171,14 +172,16 @@ typedef ToPayFunc2 = void Function(int id, int index);
 class RechargePopup extends StatefulWidget {
   final int id;
   final int gold;
-  final int rmb;
+  final double price;
+  final String currencyCode;
   final ToPayFunc2 toPay;
 
   const RechargePopup(
       {Key? key,
       required this.id,
       required this.gold,
-      required this.rmb,
+      required this.price,
+      this.currencyCode = CurrencyCode.CNY,
       required this.toPay})
       : super(key: key);
 
@@ -216,7 +219,7 @@ class _RechargePopupState extends State<RechargePopup> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _rechargeitem(widget.gold, widget.rmb),
+            _rechargeitem(widget.gold, widget.price),
             SizedBox(height: 25.w),
             _payList(),
             SizedBox(height: 45.w)
@@ -285,7 +288,7 @@ class _RechargePopupState extends State<RechargePopup> {
     return list;
   }
 
-  _rechargeitem(int gold, int rmb) {
+  _rechargeitem(int gold, double price) {
     return Column(
       children: [
         Padding(
@@ -329,7 +332,7 @@ class _RechargePopupState extends State<RechargePopup> {
               ),
             ),
             FlutterPayAndroid.localizationText(
-              '$rmb',
+              '$price',
               style: TextStyle(
                   color: color1A1A1A,
                   fontSize: 40.sp,
