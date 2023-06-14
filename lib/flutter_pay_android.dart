@@ -63,7 +63,7 @@ class FlutterPayAndroid extends FlutterPayPlatform {
   }
 
   @override
-  Future<void> pay(dynamic rsp, int time) async {
+  Future<dynamic> pay(dynamic rsp, int time) async {
     if (getObjectKeyValueByPath(rsp, 'data.pay_type') == payTypeWechat) {
       await wechatPay(
         getObjectKeyValueByPath(rsp, 'data.appId'),
