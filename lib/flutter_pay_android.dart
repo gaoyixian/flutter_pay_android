@@ -3,102 +3,120 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_pay_interface/color.dart';
 import 'package:flutter_pay_interface/flutter_pay_interface.dart';
-
-import 'android_widgets.dart' as android;
-import 'vip_pay_bottom.dart';
-import 'withdrawal.dart';
-import 'withdrawal_details.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 /// 支付类型
-const payTypeAlipay = 1;
-const payTypeWechat = 2;
-const payTypeIos = 3;
-const payTypeBankcard = 4;
-
-//提现账户类型
-const int DEFAULT = 0;
-const int ALIP = 1;
-const int WECHAT = 2;
-const int BANDCARD = 3;
+// const payTypeAlipay = 1;
+// const payTypeWechat = 2;
+// const payTypeIos = 3;
+// const payTypeBankcard = 4;
+const payTypeGooglePlay = 7;
 
 class FlutterPayAndroid extends FlutterPayPlatform {
-  static const MethodChannel _channel = MethodChannel('flutter_pay');
-
   /// Registers this class as the default instance of [PathProviderPlatform].
   static void registerWith() {
     print("@@@@@@@@@@@@@@@ FlutterPayPlatform.instance = FlutterPayAndroid()");
     FlutterPayPlatform.instance = FlutterPayAndroid();
   }
 
-  static Future<String?> get platformVersion async {
-    final String? version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
+  static late LocalizationText localizationText;
 
-  static late IWithDrawalMgr withDrawalMgr;
+  static late InAppPurchase _inAppPurchase;
+  static late StreamSubscription<List<PurchaseDetails>> _subscription;
+  static late VerifyReceipt _verifyReceipt;
+  static late void Function() _onError;
   static late ShowBottomSheet showBottomSheet;
 
-  /// 微信
-  static Future<bool> wechatPay(String appId, String partnerId, String prepayId,
-      String nonceStr, String timeStamp, String sign) async {
-    var result = await _channel.invokeMethod('wechatPay', <String, dynamic>{
-      'appId': appId,
-      'partnerId': partnerId,
-      'prepayId': prepayId,
-      'nonceStr': nonceStr,
-      'timeStamp': timeStamp,
-      'sign': sign,
-    });
-    return result == 'true';
-  }
-
-  /// 支付宝
-  static Future<bool> aliPay(String orderInfo) async {
-    var result = await _channel.invokeMethod('aliPay', <String, dynamic>{
-      'orderInfo': orderInfo,
-    });
-    return result == 'true';
-  }
-
   @override
-  Future<dynamic> pay(dynamic rsp, int time) async {
-    if (getObjectKeyValueByPath(rsp, 'data.pay_type') == payTypeWechat) {
-      await wechatPay(
-        getObjectKeyValueByPath(rsp, 'data.appId'),
-        getObjectKeyValueByPath(rsp, 'data.partnerId'),
-        getObjectKeyValueByPath(rsp, 'data.prepayId'),
-        getObjectKeyValueByPath(rsp, 'data.nonceStr'),
-        getObjectKeyValueByPath(rsp, 'data.timeStamp'),
-        getObjectKeyValueByPath(rsp, 'data.sign'),
-      );
-    } else if (getObjectKeyValueByPath(rsp, 'data.pay_type') == payTypeAlipay) {
-      await aliPay(getObjectKeyValueByPath(rsp, 'data.info'));
+  Future<void> init({
+    required VerifyReceipt verifyReceipt,
+    required LocalizationText localizationText,
+    required void Function() onError,
+    required ShowBottomSheet showBottomSheet,
+    required IWithDrawalMgr withDrawalMgr,
+    String? payConfig, //pay插件配置
+  }) async {
+    FlutterPayAndroid.localizationText = localizationText;
+    FlutterPayAndroid.showBottomSheet = showBottomSheet;
+    _verifyReceipt = verifyReceipt;
+    _onError = onError;
+    _inAppPurchase = InAppPurchase.instance;
+    final Stream<List<PurchaseDetails>> purchaseUpdated =
+        _inAppPurchase.purchaseStream;
+    _subscription =
+        purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
+      _listenToPurchaseUpdated(purchaseDetailsList);
+    }, onDone: () {
+      _subscription.cancel();
+    }, onError: (Object error) {
+      // handle error here.
+    });
+  }
+
+  void _listenToPurchaseUpdated(
+      List<PurchaseDetails> purchaseDetailsList) async {
+    for (PurchaseDetails purchaseDetails in purchaseDetailsList) {
+      if (purchaseDetails.status == PurchaseStatus.pending) {
+        //进行中
+        print('~~~~~进行中');
+      } else {
+        if (purchaseDetails.status == PurchaseStatus.error) {
+          _onError();
+          print('~~~~~${purchaseDetails.error!}');
+        } else if (purchaseDetails.status == PurchaseStatus.purchased ||
+            purchaseDetails.status == PurchaseStatus.restored) {
+          _verifyReceipt(
+              purchaseDetails.purchaseID,
+              purchaseDetails.verificationData.serverVerificationData,
+              _id.toString());
+        }
+        if (purchaseDetails.pendingCompletePurchase) {
+          await _inAppPurchase.completePurchase(purchaseDetails);
+        }
+      }
     }
   }
 
-  static late LocalizationText localizationText;
-
   @override
-  Future<void> restorePurchases() async {}
+  Future<void> restorePurchases() async {
+    await _inAppPurchase.restorePurchases();
+  }
 
+  int _id = 0;
+  String _orderNumber = '';
   @override
-  Future<void> logout() async {}
-
-  @override
-  getLxbysm() {
-    return android.getLxbysm();
+  Future<dynamic> pay(dynamic rsp, int time) async {
+    _id = getObjectKeyValueByPath(rsp, 'data.id');
+    _orderNumber = getObjectKeyValueByPath(rsp, 'data.order_number');
+    String productId = getObjectKeyValueByPath(rsp, 'data.ios_product_id');
+    Set<String> set = {};
+    set.add(productId);
+    ProductDetailsResponse res = await _inAppPurchase.queryProductDetails(set);
+    ProductDetails? productDetail;
+    for (var item in res.productDetails) {
+      if (item.id == productId) {
+        productDetail = item;
+      }
+    }
+    if (productDetail != null) {
+      final purchaseParam = PurchaseParam(
+          productDetails: productDetail, applicationUserName: "$time");
+      _inAppPurchase.buyConsumable(
+          purchaseParam: purchaseParam, autoConsume: true);
+    }
   }
 
   @override
-  Widget getPlayButton(BuildContext context, double rate, int chooseIndex,
-      void Function(int index, int typ) toPay) {
-    return android.AndroidPlayButton(
-        rate: rate,
-        toPayFunc: (typ) {
-          toPay(chooseIndex + 3, typ);
-        });
+  Future<void> logout() async {
+    _subscription.cancel();
+  }
+
+  @override
+  getLxbysm() {
+    return Container();
   }
 
   @override
@@ -111,60 +129,52 @@ class FlutterPayAndroid extends FlutterPayPlatform {
     required void Function(int p1, int p2) toPay,
   }) {
     currencyCode ??= CurrencyCode.CNY;
-    // Navigator.of(context).pop();
-    FlutterPayAndroid.showBottomSheet(
-        context: context,
-        container:
-            android.RechargePopup(id: id, gold: gold, price: price, currencyCode: currencyCode, toPay: toPay));
+    toPay(id, payTypeGooglePlay);
+  }
+
+  @override
+  Widget getPlayButton(BuildContext context, double rate, int chooseIndex,
+      void Function(int index, int typ) toPay) {
+    return GestureDetector(
+      onTap: () {
+        toPay(chooseIndex, payTypeGooglePlay);
+      },
+      child: Container(
+        alignment: Alignment.center,
+        width: 180 * rate,
+        color: Colors.transparent,
+        child: FlutterPayAndroid.localizationText('立即开通支付',
+            style: TextStyle(
+              color: hexColor(0xFFFFFF),
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w400,
+            )),
+      ),
+    );
   }
 
   @override
   void vipPayBottom(BuildContext context,
       {required int index, required void Function(bool isShow) onchange}) {
-    FlutterPayAndroid.showBottomSheet(
-        context: context,
-        container: VipPayBottom(
-          index: index,
-          onchange: onchange,
-        ));
+    // TODO: implement vipPayBottom
   }
 
   @override
   int getTyp(bool isAli) {
-    return isAli ? payTypeAlipay : payTypeWechat;
+    return payTypeGooglePlay;
   }
 
   @override
   String getPname(bool isAli) {
-    return isAli ? '支付宝支付' : '微信支付';
+    return 'Google Play';
   }
 
   @override
   String getPnameByType(int type) {
     switch(type){
-      case payTypeAlipay:
-        return '支付宝支付';
-      case payTypeWechat:
-        return '微信支付';
+      case payTypeGooglePlay:
+        return 'Google Play';
     }
     return '';
-  }
-
-  @override
-  Future<void> init(
-      {required VerifyReceipt verifyReceipt,
-      required LocalizationText localizationText,
-      required void Function() onError,
-      required ShowBottomSheet showBottomSheet,
-      required IWithDrawalMgr withDrawalMgr,
-      String? payConfig, //pay插件配置
-  }) async {
-    FlutterPayAndroid.localizationText = localizationText;
-    FlutterPayAndroid.showBottomSheet = showBottomSheet;
-    FlutterPayAndroid.withDrawalMgr = withDrawalMgr;
-    withDrawalMgr.setMakeEarningsFunc(() => const android.Earnings());
-    withDrawalMgr.setMakeCashFunc(() => const Withdrawal());
-    withDrawalMgr.setMakeCashDetailsFunc(() => const Withdrawaldetails());
-    withDrawalMgr.setPageDef(Withdrawal, Withdrawaldetails, android.Earnings);
   }
 }
