@@ -12,13 +12,13 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.5.3+2
-  # google play内购
+  # google play
   in_app_purchase: ^3.0.7
-  # 支付接口
+  # flutter_pay_interface
   flutter_pay_interface:
    git:
     url: http://git.eatdesk.net/flutter_plugin/flutter_pay_interface.git
-    ref: 37a8aeeb0f6fc61d740bc5abd7f7f062f50409cf
+    ref: 353b0082d25a8558558caf011be2ea61ebfa5293
   #  path: ../flutter_pay_interface
 
 dev_dependencies:
