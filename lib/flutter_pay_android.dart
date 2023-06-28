@@ -105,7 +105,7 @@ class FlutterPayAndroid extends FlutterPayPlatform {
       final purchaseParam = PurchaseParam(
           productDetails: productDetail, applicationUserName: "$time");
       _inAppPurchase.buyConsumable(
-          purchaseParam: purchaseParam, autoConsume: true);
+          purchaseParam: purchaseParam, autoConsume: false);
     }
   }
 
