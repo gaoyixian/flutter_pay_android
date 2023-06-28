@@ -18,7 +18,7 @@ dependencies:
   flutter_pay_interface:
    git:
     url: http://git.eatdesk.net/flutter_plugin/flutter_pay_interface.git
-    ref: 353b0082d25a8558558caf011be2ea61ebfa5293
+    ref: 1e277be85346ee21040a3f873a221ac7884796d6
   #  path: ../flutter_pay_interface
 
 dev_dependencies:

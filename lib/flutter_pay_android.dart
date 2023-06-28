@@ -69,9 +69,11 @@ class FlutterPayAndroid extends FlutterPayPlatform {
         } else if (purchaseDetails.status == PurchaseStatus.purchased ||
             purchaseDetails.status == PurchaseStatus.restored) {
           _verifyReceipt(
-              purchaseDetails.purchaseID,
-              purchaseDetails.verificationData.serverVerificationData,
-              _id.toString());
+            purchaseDetails.purchaseID,
+            purchaseDetails.verificationData.serverVerificationData,
+            _orderNumber,
+            purchaseDetails.productID,
+          );
         }
         if (purchaseDetails.pendingCompletePurchase) {
           await _inAppPurchase.completePurchase(purchaseDetails);
@@ -85,11 +87,9 @@ class FlutterPayAndroid extends FlutterPayPlatform {
     await _inAppPurchase.restorePurchases();
   }
 
-  int _id = 0;
   String _orderNumber = '';
   @override
   Future<dynamic> pay(dynamic rsp, int time) async {
-    _id = getObjectKeyValueByPath(rsp, 'data.id');
     _orderNumber = getObjectKeyValueByPath(rsp, 'data.order_number');
     String productId = getObjectKeyValueByPath(rsp, 'data.ios_product_id');
     Set<String> set = {};
